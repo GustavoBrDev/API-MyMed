@@ -1,30 +1,29 @@
 package com.ifsc.ctds.my_med_api.models;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
-public class Usuario {
+public class Relato {
+
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String nome;
+    private String texto;
 
-    private String email;
-
-    private String senha;
-
-    private LocalDate dataNascimento;
+    @OneToMany
+    private Medicamento medicamento;
 
     @CreatedDate
     private LocalDateTime createdAt;
-
-    private boolean isInactive;
 }
