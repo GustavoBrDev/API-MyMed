@@ -20,9 +20,9 @@ public class MedicamentoService {
     private MedicamentoRepository repository;
 
     public MedicamentoResponseDTO create(MedicamentoRequestDTO dto) {
-        Medicamento entity = toEntity(dto);
+        Medicamento entity = dto.convert();
         Medicamento saved = repository.save(entity);
-        return toResponse(saved);
+        return saved.convert();
     }
 
     public MedicamentoResponseDTO update(Long id, MedicamentoRequestDTO dto) {
@@ -35,7 +35,7 @@ public class MedicamentoService {
         existing.setObservacoes(dto.getObservacoes());
 
         Medicamento saved = repository.save(existing);
-        return toResponse(saved);
+        return saved.convert();
     }
 
     public MedicamentoResponseDTO patch(Long id, MedicamentoPatchDTO dto) {
@@ -54,20 +54,20 @@ public class MedicamentoService {
         }
 
         Medicamento saved = repository.save(existing);
-        return toResponse(saved);
+        return saved.convert();
     }
 
     @Transactional(readOnly = true)
     public MedicamentoResponseDTO findById(Long id) {
         Medicamento entity = repository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Medicamento não encontrado com id: " + id));
-        return toResponse(entity);
+        return entity.convert();
     }
 
     @Transactional(readOnly = true)
     public List<MedicamentoResponseDTO> findAll() {
         return repository.findAll().stream()
-                .map(this::toResponse)
+                .map(Medicamento::convert)
                 .collect(Collectors.toList());
     }
 
@@ -78,20 +78,4 @@ public class MedicamentoService {
         repository.deleteById(id);
     }
 
-    private Medicamento toEntity(MedicamentoRequestDTO dto) {
-        Medicamento m = new Medicamento();
-        m.setNome(dto.getNome());
-        m.setDescricao(dto.getDescricao());
-        m.setObservacoes(dto.getObservacoes());
-        return m;
-    }
-
-    private MedicamentoResponseDTO toResponse(Medicamento m) {
-        MedicamentoResponseDTO r = new MedicamentoResponseDTO();
-        r.setId(m.getId());
-        r.setNome(m.getNome());
-        r.setDescricao(m.getDescricao());
-        r.setObservacoes(m.getObservacoes());
-        return r;
-    }
 }
