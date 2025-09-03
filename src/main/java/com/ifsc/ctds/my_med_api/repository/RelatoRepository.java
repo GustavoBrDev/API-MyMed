@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface RelatoRepository extends JpaRepository<Relato, Long> {
 
-    List<Relato> findByMedicamento_ID(Long id);
+    List<Relato> findByMedicamento_id(Long id);
 }

@@ -2,10 +2,7 @@ package com.ifsc.ctds.my_med_api.models;
 
 import com.ifsc.ctds.my_med_api.dto.response.MedicamentoResponseDTO;
 import com.ifsc.ctds.my_med_api.dto.response.ResponseDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,6 +32,9 @@ public class Medicamento implements ConvertibleModel {
 
     @CreatedDate
     private LocalDateTime createdAt;
+
+    @ManyToOne
+    private Usuario usuario;
 
     @Override
     public MedicamentoResponseDTO convert() {

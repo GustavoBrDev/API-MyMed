@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface AlarmeRepository extends JpaRepository<Alarme, Long> {
 
-    List<Alarme> findByMedicamento_ID(Long id);
+    List<Alarme> findByMedicamento_id(Long id);
 }

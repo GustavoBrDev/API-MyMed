@@ -21,7 +21,7 @@ public class Relato {
     private String nome;
     private String texto;
 
-    @OneToMany
+    @ManyToOne
     private Medicamento medicamento;
 
     @CreatedDate

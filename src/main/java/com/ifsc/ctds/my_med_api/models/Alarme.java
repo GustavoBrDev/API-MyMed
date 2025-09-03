@@ -18,6 +18,6 @@ public class Alarme {
     private String nome;
     private String ocorrencia;
 
-    @OneToMany
+    @ManyToOne
     private Medicamento medicamento;
 }
